@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Background Slider */
+    .background-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      animation: slide-background 18s infinite;
+    }
+
+    @keyframes slide-background {
+      0% { background: url('vk.jpg') no-repeat center center/cover; }
+      16.66% { background: url('image2.jpg') no-repeat center center/cover; }
+      33.33% { background: url('image3.jpg') no-repeat center center/cover; }
+      50% { background: url('image4.jpg') no-repeat center center/cover; }
+      66.66% { background: url('image5.jpg') no-repeat center center/cover; }
+      83.33% { background: url('image1.jpg') no-repeat center center/cover; }
+      100% { background: url('vk.jpg') no-repeat center center/cover; }
+    }
+
+    .background-slider::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: 10px 0;
+    }
+
+    h2 {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 20px auto;
+      border: 5px solid gold;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the image is not distorted */
+    }
+
+    .countdown {
+      font-size: 2em;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: gold;
+      color: black;
+      padding: 15px 20px;
+      text-decoration: none;
+      font-size: 1em;
+      border-radius: 30px;
+      font-weight: bold;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: darkorange;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 1em;
+    }
+
+    /* Responsive Design for Tablets */
+    @media (max-width: 1024px) {
+      .container {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      h2 {
+        font-size: 1.1em;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+
+      .countdown {
+        font-size: 1.8em;
+      }
+
+      .btn {
+        font-size: 0.9em;
+        padding: 12px 15px;
+      }
+
+      .footer {
+        font-size: 0.9em;
+      }
+    }
+
+    /* Responsive Design for Mobile */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        max-width: 350px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      h2 {
+        font-size: 1em;
+      }
+
+      .profile-image {
+        width: 100px;
+        height: 100px;
+      }
+
+      .countdown {
+        font-size: 1.5em;
+      }
+
+      .btn {
+        font-size: 0.8em;
+        padding: 10px 12px;
+      }
+
+      .footer {
+        font-size: 0.8em;
+      }
+    }
+
+    /* Responsive Design for Small Devices */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.2em;
+      }
+
+      h2 {
+        font-size: 0.9em;
+      }
+
+      .profile-image {
+        width: 80px;
+        height: 80px;
+      }
+
+      .countdown {
+        font-size: 1.2em;
+      }
+
+      .btn {
+        font-size: 0.7em;
+        padding: 8px 10px;
+      }
+
+      .footer {
+        font-size: 0.7em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Slider -->
+  <div class="background-slider"></div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>👑 GOVINDA 👑</h1>
+    <h2>MALIK MUMBAI ❤</h2>
+    <div class="profile-image">
+      <img src="telegram.png" alt="Profile Image">
+    </div>
+    <h1>FREE JOINING ENDS IN...</h1>
+    <div class="countdown" id="countdown">30</div>
+    <a href="https://t.me/+_kaUiamEzMthZTQ1" class="btn" id="joinBtn">JOIN THE Original Malik <br>Mumbai 😎</a>
+    <div class="footer">Join The Original Malik <br> Mumbai 😎</div>
+  </div>
+
+  <script>
+    let countdown = 30;
+    const countdownElement = document.getElementById("countdown");
+    const joinBtn = document.getElementById("joinBtn");
+    const colors = ["gold", "darkorange", "red", "limegreen", "blue"];
+    let colorIndex = 0;
+
+    // Countdown Timer
+    const timer = setInterval(() => {
+      countdown--;
+      countdownElement.textContent = countdown;
+
+      if (countdown <= 0) {
+        clearInterval(timer);
+        window.location.href = "https://t.me/+_kaUiamEzMthZTQ1";
+      }
+    }, 1000);
+
+    // Button Color Change
+    setInterval(() => {
+      colorIndex = (colorIndex + 1) % colors.length;
+      joinBtn.style.backgroundColor = colors[colorIndex];
+    }, 500);
+
+    // Join Button Click
+    joinBtn.addEventListener("click", () => {
+      window.open("https://t.me/+_kaUiamEzMthZTQ1", "_blank");
+    });
+  </script>
+</body>
+</html>
